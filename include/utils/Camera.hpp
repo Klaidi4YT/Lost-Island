@@ -7,7 +7,6 @@ class Camera {
 private:
     View view;
     float normalZoom = 1;
-    float minZoom = 0.5;
     float maxZoom = 5;
 public:
     Camera(int windowWidth, int windowHeight) {
@@ -16,7 +15,6 @@ public:
     }
     void update(float x, float y) {
         view.setCenter({x, y});
-        view.zoom(normalZoom);
     }
 
     void draw(RenderWindow &window) {

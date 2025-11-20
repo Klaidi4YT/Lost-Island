@@ -29,7 +29,6 @@ public:
 
             float t = clock.getElapsedTime().asSeconds();
 
-            // Закінчити екран після fadeOut
             if (t > fadeInTime + holdTime + fadeOutTime)
                 break;
 
@@ -38,19 +37,15 @@ public:
                     window.close();
             }
 
-            // ---- ОБЧИСЛЮЄМО ПРОЗОРІСТЬ (ALPHA) ----
             float alpha = 255.0f;
 
             if (t < fadeInTime) {
-                // ✨ Fade in (0 → 255)
                 alpha = (t / fadeInTime) * 255.0f;
             }
             else if (t < fadeInTime + holdTime) {
-                // ✨ Full visible
                 alpha = 255.0f;
             }
             else {
-                // ✨ Fade out (255 → 0)
                 float outT = t - (fadeInTime + holdTime);
                 alpha = 255.0f * (1.0f - (outT / fadeOutTime));
             }
@@ -58,12 +53,10 @@ public:
             if (alpha < 0) alpha = 0;
             if (alpha > 255) alpha = 255;
 
-            // ---- ВСТАНОВЛЮЄМО ПРОЗОРІСТЬ СПРАЙТУ ----
             Color color = sprite.getColor();
             color.a = (uint8_t)alpha;
             sprite.setColor(color);
 
-            // ---- РЕНДЕР ----
             window.clear(Color::Black);
             window.draw(sprite);
             window.display();
