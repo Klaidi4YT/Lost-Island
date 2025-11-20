@@ -16,7 +16,7 @@ const int FRAME_RUN_COUNT = 11;
 
 int main() {
     RenderWindow window(VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), "Lost Island");
-    window.setFramerateLimit(100);
+    window.setFramerateLimit(144);
 
     Image logo;
     logo.loadFromFile("../assets/utils/logo.png");
@@ -46,7 +46,7 @@ int main() {
 
     Sprite playerSprite(front[0]);
     playerSprite.setOrigin(playerSprite.getLocalBounds().getCenter());
-    playerSprite.setPosition({500, 500});
+    playerSprite.setPosition(island.getSprite().getGlobalBounds().getCenter());
     playerSprite.setScale({0.5f, 0.5f});
     float CurrentFrameTime = 0;
     Clock clock;
@@ -61,7 +61,7 @@ int main() {
                 Keyboard::isKeyPressed(Keyboard::Key::S) ||
                 Keyboard::isKeyPressed(Keyboard::Key::D));
         float walkspeed = 0.15f;
-        float runspeed = 0.25f;
+        float runspeed = 0.20f;
         float currentspeed = running ? runspeed : walkspeed;
         float time = clock.getElapsedTime().asMicroseconds();
         clock.restart();
@@ -74,7 +74,7 @@ int main() {
                 window.close();
             }
         }
-
+        Vector2f oldPos = playerSprite.getPosition();
         if (Keyboard::isKeyPressed(Keyboard::Key::W)) {
             running ? utils.currentFrame(CurrentFrameTime, time, FRAME_RUN_COUNT) : utils.currentFrame(CurrentFrameTime, time, FRAME_COUNT);
             direction = BACK;
@@ -82,21 +82,24 @@ int main() {
             playerSprite.move(delta);
             moving = true;
             camera.update(playerSprite.getPosition().x, playerSprite.getPosition().y);
-        } else if (Keyboard::isKeyPressed(Keyboard::Key::A)) {
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Key::A)) {
             running ? utils.currentFrame(CurrentFrameTime, time, FRAME_RUN_COUNT) : utils.currentFrame(CurrentFrameTime, time, FRAME_COUNT);
             direction = LEFT;
             Vector2f delta(-currentspeed * time, 0);
             playerSprite.move(delta);
             moving = true;
             camera.update(playerSprite.getPosition().x, playerSprite.getPosition().y);
-        } else if (Keyboard::isKeyPressed(Keyboard::Key::S)) {
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Key::S)) {
             running ? utils.currentFrame(CurrentFrameTime, time, FRAME_RUN_COUNT) : utils.currentFrame(CurrentFrameTime, time, FRAME_COUNT);
             direction = FRONT;
             Vector2f delta(0, currentspeed * time);
             playerSprite.move(delta);
             moving = true;
             camera.update(playerSprite.getPosition().x, playerSprite.getPosition().y);
-        } else if (Keyboard::isKeyPressed(Keyboard::Key::D)) {
+        }
+        if (Keyboard::isKeyPressed(Keyboard::Key::D)) {
             running ? utils.currentFrame(CurrentFrameTime, time, FRAME_RUN_COUNT) : utils.currentFrame(CurrentFrameTime, time, FRAME_COUNT);
             direction = RIGHT;
             Vector2f delta(currentspeed * time, 0);
@@ -130,7 +133,7 @@ int main() {
                 case LEFT: playerSprite.setTexture(idle_left[int(CurrentFrameTime)], true); break;
             }
         }
-
+        island.collision(playerSprite, oldPos);
         camera.update(playerSprite.getPosition().x, playerSprite.getPosition().y);
         window.setView(window.getDefaultView());
         ocean.draw(window);
