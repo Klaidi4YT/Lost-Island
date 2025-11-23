@@ -8,9 +8,15 @@ FETCHCONTENT_MAKEAVAILABLE(SFML)
 
 set(CMAKE_EXE_LINKER_FLAGS "-static")
 
-add_executable(Lost_Island src/main.cpp)
+add_executable(Lost_Island src/main.cpp
+        src/entities/Player.cpp
+        src/world/Ocean.cpp
+        src/world/Island.cpp
+        src/utils/Camera.cpp
+        src/utils/Utils.cpp
+        src/utils/DebugOverlay.cpp
+        src/screens/Loading.cpp)
 
 target_include_directories(Lost_Island PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
+        ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(Lost_Island sfml-system sfml-graphics sfml-audio sfml-window)

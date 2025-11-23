@@ -6,19 +6,9 @@ using namespace sf;
 class Camera {
 private:
     View view;
-    float normalZoom = 1;
-    float maxZoom = 5;
 public:
-    Camera(int windowWidth, int windowHeight) {
-        view.setSize({(float)windowWidth, (float)windowHeight});
-        view.setCenter({(float)windowWidth / 2, (float)windowHeight / 2});
-    }
-    void update(float x, float y) {
-        view.setCenter({x, y});
-    }
-
-    void draw(RenderWindow &window) {
-        window.setView(view);
-    }
+    Camera(int windowWidth, int windowHeight);
+    void update(float x, float y);
+    void draw(RenderWindow &window);
 };
 #endif
