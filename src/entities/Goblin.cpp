@@ -5,7 +5,7 @@ Goblin::Goblin(Vector2f position) : texture("../assets/entities/Goblin/FrontIdle
 
     direction = FRONT;
     moving = false;
-    currentSpeed = 0.04f; // Базова швидкість для AIMobs
+    currentSpeed = 0.04f;
 
     walkSpeed = 0.04f;
     runSpeed = 0.07f;
