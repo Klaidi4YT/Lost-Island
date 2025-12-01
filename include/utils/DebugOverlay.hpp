@@ -7,8 +7,11 @@ class DebugOverlay {
 private:
     Font font;
     Text text;
+    int frames = 0;
+    int currentFps = 0;
     public:
-    DebugOverlay();
+    DebugOverlay ();
+    void FPS(Clock &fpsClock);
     void setInfo(Sprite &player, float speed);
     void draw(RenderWindow &window);
 };

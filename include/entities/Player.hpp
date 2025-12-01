@@ -5,11 +5,11 @@
 #include "utils/Utils.hpp"
 using namespace sf;
 using namespace std;
-const int FRAME_COUNT = 19;
-const int FRAME_IDLE_COUNT = 16;
-const int FRAME_RUN_COUNT = 11;
-const int FRAME_ATTACKING = 9;
 class Player {
+    const int FRAME_WALKING_COUNT = 19;
+    const int FRAME_IDLE_COUNT = 16;
+    const int FRAME_RUN_COUNT = 11;
+    const int FRAME_ATTACKING = 9;
 private:
     Texture texture;
     Sprite sprite;
@@ -23,7 +23,7 @@ private:
     float walkSpeed;
     float runSpeed;
     float currentSpeed;
-    vector<Texture> front, back, left, right;
+    vector<Texture> walking_front, walking_back, walking_left, walking_right;
     vector<Texture> idle_front, idle_back, idle_left, idle_right;
     vector<Texture> run_front, run_back, run_left, run_right;
     vector<Texture> attack_front, attack_back, attack_left, attack_right;

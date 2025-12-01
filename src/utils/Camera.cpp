@@ -9,3 +9,6 @@ void Camera::update(float x, float y) {
 void Camera::draw(RenderWindow &window) {
     window.setView(view);
 }
+View &Camera::getView() {
+    return view;
+}

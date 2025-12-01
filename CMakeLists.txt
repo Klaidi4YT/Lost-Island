@@ -10,12 +10,16 @@ set(CMAKE_EXE_LINKER_FLAGS "-static")
 
 add_executable(Lost_Island src/main.cpp
         src/entities/Player.cpp
+        src/entities/Goblin.cpp
         src/world/Ocean.cpp
         src/world/Island.cpp
         src/utils/Camera.cpp
         src/utils/Utils.cpp
         src/utils/DebugOverlay.cpp
-        src/screens/Loading.cpp)
+        src/screens/Loading.cpp
+        src/utils/Decoration.cpp
+        src/utils/Screen.cpp
+        src/entities/AIMobs.cpp)
 
 target_include_directories(Lost_Island PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include)

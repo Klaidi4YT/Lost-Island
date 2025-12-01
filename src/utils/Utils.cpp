@@ -13,3 +13,9 @@ void Utils::loadTextures(vector<Texture>& vec, const string& path, int count) {
         }
     }
 }
+void Utils::oceanSound() {
+    Music music;
+    music.openFromFile("../assets/utils/sounds/ocean.mp3");
+    music.setLooping(true);
+    music.play();
+}

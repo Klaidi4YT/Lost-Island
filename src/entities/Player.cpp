@@ -7,10 +7,10 @@ Player::Player(Vector2f startPosition) : texture("../assets/entities/Player/Fron
     running = false;
     moving = false;
 
-    front.resize(FRAME_COUNT);
-    back.resize(FRAME_COUNT);
-    left.resize(FRAME_COUNT);
-    right.resize(FRAME_COUNT);
+    walking_front.resize(FRAME_WALKING_COUNT);
+    walking_back.resize(FRAME_WALKING_COUNT);
+    walking_left.resize(FRAME_WALKING_COUNT);
+    walking_right.resize(FRAME_WALKING_COUNT);
     idle_front.resize(FRAME_IDLE_COUNT);
     idle_back.resize(FRAME_IDLE_COUNT);
     idle_left.resize(FRAME_IDLE_COUNT);
@@ -26,17 +26,17 @@ Player::Player(Vector2f startPosition) : texture("../assets/entities/Player/Fron
 
     loadAllTextures();
 
-    sprite.setTexture(front[0]);
+    sprite.setTexture(walking_front[0]);
     sprite.setOrigin(sprite.getLocalBounds().getCenter());
     sprite.setPosition(startPosition);
     sprite.setScale({0.5f, 0.5f});
 
 }
 void Player::loadAllTextures() {
-    utils.loadTextures(front, "../assets/entities/Player/FrontWalking/", FRAME_COUNT);
-    utils.loadTextures(back, "../assets/entities/Player/BackWalking/", FRAME_COUNT);
-    utils.loadTextures(left, "../assets/entities/Player/LeftWalking/", FRAME_COUNT);
-    utils.loadTextures(right, "../assets/entities/Player/RightWalking/", FRAME_COUNT);
+    utils.loadTextures(walking_front, "../assets/entities/Player/FrontWalking/", FRAME_WALKING_COUNT);
+    utils.loadTextures(walking_back, "../assets/entities/Player/BackWalking/", FRAME_WALKING_COUNT);
+    utils.loadTextures(walking_left, "../assets/entities/Player/LeftWalking/", FRAME_WALKING_COUNT);
+    utils.loadTextures(walking_right, "../assets/entities/Player/RightWalking/", FRAME_WALKING_COUNT);
     utils.loadTextures(idle_front, "../assets/entities/Player/FrontIdle/", FRAME_IDLE_COUNT);
     utils.loadTextures(idle_back, "../assets/entities/Player/BackIdle/", FRAME_IDLE_COUNT);
     utils.loadTextures(idle_left, "../assets/entities/Player/LeftIdle/", FRAME_IDLE_COUNT);
@@ -70,7 +70,7 @@ void Player::handleInput(float time) {
     currentSpeed = running ? runSpeed : walkSpeed;
     Vector2f delta(0,0);
     if (Keyboard::isKeyPressed(Keyboard::Key::W)) {
-        running ? utils.currentFrame(currentFrameTime, time, FRAME_RUN_COUNT) : utils.currentFrame( currentFrameTime, time, FRAME_COUNT);
+        running ? utils.currentFrame(currentFrameTime, time, FRAME_RUN_COUNT) : utils.currentFrame( currentFrameTime, time, FRAME_WALKING_COUNT);
         direction = BACK;
         delta.y = -currentSpeed * time;
         sprite.move(delta);
@@ -80,7 +80,7 @@ void Player::handleInput(float time) {
         moving = true;
 
     } else if (Keyboard::isKeyPressed(Keyboard::Key::A)) {
-        running ? utils.currentFrame(currentFrameTime, time, FRAME_RUN_COUNT) : utils.currentFrame(currentFrameTime, time, FRAME_COUNT);
+        running ? utils.currentFrame(currentFrameTime, time, FRAME_RUN_COUNT) : utils.currentFrame(currentFrameTime, time, FRAME_WALKING_COUNT);
         direction = LEFT;
         delta.x = -currentSpeed * time;
         sprite.move(delta);
@@ -90,7 +90,7 @@ void Player::handleInput(float time) {
         moving = true;
 
     } else if (Keyboard::isKeyPressed(Keyboard::Key::S)) {
-        running ? utils.currentFrame(currentFrameTime, time, FRAME_RUN_COUNT) : utils.currentFrame(currentFrameTime, time, FRAME_COUNT);
+        running ? utils.currentFrame(currentFrameTime, time, FRAME_RUN_COUNT) : utils.currentFrame(currentFrameTime, time, FRAME_WALKING_COUNT);
         direction = FRONT;
         delta.y = currentSpeed * time;
         sprite.move(delta);
@@ -99,7 +99,7 @@ void Player::handleInput(float time) {
         }
         moving = true;
     } else if (Keyboard::isKeyPressed(Keyboard::Key::D)) {
-        running ? utils.currentFrame(currentFrameTime, time, FRAME_RUN_COUNT) : utils.currentFrame(currentFrameTime, time, FRAME_COUNT);
+        running ? utils.currentFrame(currentFrameTime, time, FRAME_RUN_COUNT) : utils.currentFrame(currentFrameTime, time, FRAME_WALKING_COUNT);
         direction = RIGHT;
         delta.x = currentSpeed * time;
         sprite.move(delta);
@@ -120,10 +120,10 @@ void Player::updateAnimations(float time) {
             }
         } else  {
             switch (direction) {
-                case FRONT: sprite.setTexture(front[int(currentFrameTime)]); break;
-                case BACK:  sprite.setTexture(back[int(currentFrameTime)]); break;
-                case LEFT:  sprite.setTexture(left[int(currentFrameTime)]); break;
-                case RIGHT: sprite.setTexture(right[int(currentFrameTime)]); break;
+                case FRONT: sprite.setTexture(walking_front[int(currentFrameTime)]); break;
+                case BACK:  sprite.setTexture(walking_back[int(currentFrameTime)]); break;
+                case LEFT:  sprite.setTexture(walking_left[int(currentFrameTime)]); break;
+                case RIGHT: sprite.setTexture(walking_right[int(currentFrameTime)]); break;
             }
         }
     } else {

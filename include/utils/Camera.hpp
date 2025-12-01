@@ -10,5 +10,8 @@ public:
     Camera(int windowWidth, int windowHeight);
     void update(float x, float y);
     void draw(RenderWindow &window);
+    void mouseButtonZoom();
+    View &getView();
+
 };
 #endif
