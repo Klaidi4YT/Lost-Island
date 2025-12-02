@@ -8,16 +8,28 @@ AIMobs::AIMobs() {
     moveTime = 0;
 }
 
-void AIMobs::updateAI(float time, Sprite &sprite, Island &island) {
+void AIMobs::updateAI(float time, Sprite &sprite, Island &island, float walkSpeed, float runSpeed) {
     aiTimer += time;
 
     if (aiTimer > moveTime) {
         aiTimer = 0;
         moveTime = (rand() % 2000) + 1000;
         moving = (rand() % 2) == 1;
+
         if (moving) {
             int dir = rand() % 4;
             direction = static_cast<Direction>(dir);
+
+            if ((rand() % 100) < 30) {
+                running = true;
+                currentSpeed = runSpeed;
+            } else {
+                running = false;
+                currentSpeed = walkSpeed;
+            }
+
+        } else {
+            running = false;
         }
     }
 
@@ -40,6 +52,7 @@ void AIMobs::updateAI(float time, Sprite &sprite, Island &island) {
             sprite.move(movement);
         } else {
             moving = false;
+            running = false;
             aiTimer = moveTime;
         }
     }

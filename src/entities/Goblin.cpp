@@ -2,10 +2,9 @@
 
 Goblin::Goblin(Vector2f position) : texture("../assets/entities/Goblin/FrontIdle/0.png"), sprite(texture) {
     currentFrameTime = 0.0f;
-
     direction = FRONT;
     moving = false;
-    currentSpeed = 0.04f; // Базова швидкість для AIMobs
+    currentSpeed = 0.04f;
 
     walkSpeed = 0.04f;
     runSpeed = 0.07f;
@@ -47,7 +46,7 @@ void Goblin::loadAllTextures() {
     utils.loadTextures(run_right, "../assets/entities/Goblin/RightRunning/", FRAME_RUN_COUNT);
 }
 void Goblin::update(float time, Island &island) {
-    updateAI(time, sprite, island);
+    updateAI(time, sprite, island, walkSpeed, runSpeed);
     updateAnimations(time);
 }
 void Goblin::updateAnimations(float time) {
@@ -79,7 +78,18 @@ void Goblin::updateAnimations(float time) {
         }
     }
 }
+FloatRect Goblin::getHitBox() {
+    Vector2f spriteSize = sprite.getGlobalBounds().size;
+    Vector2f spritePos = sprite.getPosition();
 
+    float width = spriteSize.x * 0.5f;
+    float height = spriteSize.y * 0.7f;
+
+    float x = spritePos.x - (width / 2.0f);
+    float y = spritePos.y - (height / 2.0f);
+
+    return FloatRect({x, y}, {width, height});
+}
 void Goblin::draw(RenderWindow &window) {
     window.draw(sprite);
 }

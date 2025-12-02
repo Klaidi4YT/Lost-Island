@@ -149,6 +149,18 @@ void Player::updateAnimations(float time) {
         }
     }
 }
+FloatRect Player::getHitBox() {
+    Vector2f spriteSize = sprite.getGlobalBounds().size;
+    Vector2f spritePos = sprite.getPosition();
+
+    float width = spriteSize.x * 0.4f;
+    float height = spriteSize.y * 0.7f;
+    float x = spritePos.x - (width / 2.0f);
+    float y = spritePos.y - (height / 2.0f);
+
+    return FloatRect({x, y}, {width, height});
+}
+
 Sprite &Player::getSprite() {
     return sprite;
 }

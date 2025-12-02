@@ -27,7 +27,6 @@ private:
     vector<Texture> idle_front, idle_back, idle_left, idle_right;
     vector<Texture> run_front, run_back, run_left, run_right;
     vector<Texture> attack_front, attack_back, attack_left, attack_right;
-
     void loadAllTextures();
     void updateAnimations(float time);
     void handleInput(float time);
@@ -37,6 +36,7 @@ public:
     Vector2f getPosition();
     void update(float time);
     float getCurrentSpeed();
+    FloatRect getHitBox();
     void draw(RenderWindow &window);
 };
 #endif

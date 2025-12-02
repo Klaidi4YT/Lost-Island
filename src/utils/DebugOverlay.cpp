@@ -21,7 +21,14 @@ void DebugOverlay::setInfo(Sprite &player, float speed) {
        << "Player X: " << player.getPosition().x << endl
        << "Player Y: " << player.getPosition().y << endl
        << "Speed: " << speed << endl
-       << "FPS: " << currentFps << endl;
+       << "FPS: " << currentFps << endl
+       << "     " << endl
+       << "F1 - Hide mouse cursor" << endl
+       << "F2 - Create a screenshot" << endl
+       << "F3 - Open DebugOverlay" << endl
+       << "F4 - Enable hitboxes" << endl
+       << "F5 - Pause background music" << endl
+       << "Left Alt + F4 - Close Game";
 
     text.setString(overlay.str());
 }

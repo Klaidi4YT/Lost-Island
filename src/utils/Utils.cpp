@@ -13,9 +13,24 @@ void Utils::loadTextures(vector<Texture>& vec, const string& path, int count) {
         }
     }
 }
-void Utils::oceanSound() {
-    Music music;
-    music.openFromFile("../assets/utils/sounds/ocean.mp3");
+void Utils::backgroundSound() {
+    music.openFromFile("../assets/utils/sounds/background.mp3");
     music.setLooping(true);
+    music.setVolume(30);
+}
+void Utils::pauseSound() {
+    music.pause();
+}
+void Utils::playSound() {
     music.play();
+}
+void Utils::drawHitBox(RenderWindow &window, const FloatRect &rect) {
+    RectangleShape box;
+
+    box.setSize(rect.size);
+    box.setPosition(rect.position);
+    box.setFillColor(Color::Transparent);
+    box.setOutlineColor(Color::White);
+    box.setOutlineThickness(1.0f);
+    window.draw(box);
 }

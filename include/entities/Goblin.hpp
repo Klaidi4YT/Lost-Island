@@ -17,7 +17,6 @@ private:
     Sprite sprite;
     Utils utils;
     float currentFrameTime;
-    bool running;
     bool attacking;
     float walkSpeed;
     float runSpeed;
@@ -34,5 +33,6 @@ public:
     void update(float time, Island &island);
     void draw(RenderWindow &window);
     float getSpeed();
+    FloatRect getHitBox();
 };
 #endif
