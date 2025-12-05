@@ -15,12 +15,6 @@ using namespace sf;
 
 const int WINDOW_WIDTH = 1600;
 const int WINDOW_HEIGHT = 900;
-void backgroundSound() {
-    Music music;
-    music.openFromFile("../assets/utils/sounds/background.mp3");
-    music.setLooping(true);
-    music.play();
-}
 
 int main() {
     RenderWindow window(VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), "Lost Island");
